@@ -55,7 +55,6 @@ namespace authentication_project.Controllers
 
             return Ok(result);
         }
-        //tek tek kontrol et errorları
 
 
         [HttpPost("register")]
