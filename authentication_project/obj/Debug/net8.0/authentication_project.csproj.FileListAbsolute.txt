@@ -161,3 +161,14 @@ C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_projec
 C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\obj\Debug\net8.0\authentication_project.pdb
 C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\obj\Debug\net8.0\authentication_project.genruntimeconfig.cache
 C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\obj\Debug\net8.0\ref\authentication_project.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\obj\Debug\net8.0\authentication_project.sourcelink.json
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.Extensions.Features.dll

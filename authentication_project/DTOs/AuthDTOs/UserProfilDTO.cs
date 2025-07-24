@@ -1,4 +1,4 @@
-﻿namespace authentication_project.DTOs
+﻿namespace authentication_project.DTOs.Auth
 {
     public class UserProfilDTO
     {

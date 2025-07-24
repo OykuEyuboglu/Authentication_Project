@@ -1,7 +1,7 @@
-﻿using authentication_project.DTOs;
-using authentication_project.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using authentication_project.DTOs.Auth;
+using authentication_project.Services.AuthServices;
 namespace authentication_project.Controllers
 {
     [ApiController]
@@ -55,7 +55,6 @@ namespace authentication_project.Controllers
 
             return Ok(result);
         }
-        //tek tek kontrol et errorları
 
 
         [HttpPost("register")]

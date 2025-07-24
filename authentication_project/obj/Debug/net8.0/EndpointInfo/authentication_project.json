@@ -90,42 +90,124 @@
           }
         }
       }
+    },
+    "/api/TaskCard": {
+      "get": {
+        "tags": [
+          "TaskCard"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TaskCard"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskCardDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskCardDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskCardDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "LoginRequestDTO": {
+      "CreateTaskCardDTO": {
         "type": "object",
         "properties": {
-          "email": {
+          "Barcode": {
             "type": "string",
             "nullable": true
           },
-          "password": {
+          "TypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "StatusId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "TailNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsCritical": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "CreateUser": {
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "RegisterDTO": {
+      "LoginRequestDTO": {
         "required": [
-          "email",
-          "password",
-          "userName"
+          "Email",
+          "Password"
         ],
         "type": "object",
         "properties": {
-          "email": {
+          "Email": {
             "minLength": 1,
             "type": "string",
             "format": "email"
           },
-          "userName": {
+          "Password": {
+            "minLength": 6,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterDTO": {
+        "required": [
+          "Email",
+          "Password",
+          "UserName"
+        ],
+        "type": "object",
+        "properties": {
+          "Email": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "UserName": {
             "minLength": 1,
             "type": "string"
           },
-          "password": {
+          "Password": {
             "minLength": 6,
             "type": "string"
           }

@@ -29,7 +29,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "authentication_project.DTOs.LoginRequestDTO",
+        "Type": "authentication_project.DTOs.Auth.LoginRequestDTO",
         "IsRequired": true
       }
     ],
@@ -45,7 +45,33 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "authentication_project.DTOs.RegisterDTO",
+        "Type": "authentication_project.DTOs.Auth.RegisterDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskCardController",
+    "Method": "GetAll",
+    "RelativePath": "api/TaskCard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskCardController",
+    "Method": "Create",
+    "RelativePath": "api/TaskCard",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createDto",
+        "Type": "authentication_project.DTOs.Card.CreateTaskCardDTO",
         "IsRequired": true
       }
     ],

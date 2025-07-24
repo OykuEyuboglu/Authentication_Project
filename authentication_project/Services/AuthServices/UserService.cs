@@ -1,9 +1,9 @@
 ﻿using authentication_project.Data.Contexts;
-using authentication_project.DTOs;
+using authentication_project.DTOs.Auth;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace authentication_project.Services
+namespace authentication_project.Services.AuthServices
 {
     public class UserService : IUserService
     {

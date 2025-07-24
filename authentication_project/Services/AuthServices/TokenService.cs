@@ -1,5 +1,5 @@
 ﻿using authentication_project.Data.Contexts;
-using authentication_project.DTOs;
+using authentication_project.DTOs.Auth;
 using authentication_project.Handlers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace authentication_project.Services
+namespace authentication_project.Services.AuthServices
 {
     public class TokenService : ITokenService
     {

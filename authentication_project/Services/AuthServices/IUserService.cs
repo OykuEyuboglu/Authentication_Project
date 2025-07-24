@@ -1,7 +1,7 @@
-﻿using authentication_project.DTOs;
+﻿using authentication_project.DTOs.Auth;
 using System.Security.Claims;
 
-namespace authentication_project.Services
+namespace authentication_project.Services.AuthServices
 {
     public interface IUserService
     {
