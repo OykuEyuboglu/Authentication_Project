@@ -14,7 +14,7 @@ public class TaskCardHub : Hub
 
     public async Task RequestCards()
     {
-        Console.WriteLine("✅ SignalR: RequestCards çağrıldı.");
+        Console.WriteLine("SignalR: RequestCards çağrıldı.");
 
         var cards = await _taskCardService.GetAllAsync();
         await Clients.Caller.SendAsync("ReceiveTaskCards", cards);
