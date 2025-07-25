@@ -91,7 +91,7 @@
         }
       }
     },
-    "/api/TaskCard": {
+    "/api/TaskCard/getTaskCards": {
       "get": {
         "tags": [
           "TaskCard"
@@ -101,7 +101,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/TaskCard/addTaskCard": {
       "post": {
         "tags": [
           "TaskCard"
@@ -165,6 +167,10 @@
             "nullable": true
           },
           "CreateUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "UpdateUser": {
             "type": "string",
             "nullable": true
           }

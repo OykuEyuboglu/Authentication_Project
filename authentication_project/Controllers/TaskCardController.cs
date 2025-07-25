@@ -13,14 +13,14 @@ public class TaskCardController : ControllerBase
         _taskCardService = taskCardService;
     }
 
-    [HttpGet]
+    [HttpGet("getTaskCards")]
     public async Task<IActionResult> GetAll()
     {
         var cards = await _taskCardService.GetAllAsync();
         return Ok(cards);
     }
 
-    [HttpPost]
+    [HttpPost("addTaskCard")]
     public async Task<IActionResult> Create([FromBody] CreateTaskCardDTO createDto)
     {
         if (!ModelState.IsValid)

@@ -108,6 +108,7 @@ if (app.Environment.IsDevelopment())
 app.MapHub<TaskCardHub>("/taskCardHub");
 
 app.UseHttpsRedirection();
+app.UseRouting();
 app.UseCors("AllowAll");
 
 app.UseAuthentication();

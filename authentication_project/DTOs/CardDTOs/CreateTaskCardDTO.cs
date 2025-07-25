@@ -9,5 +9,7 @@
         public string? TailNo { get; set; }
         public bool? IsCritical { get; set; }
         public string CreateUser { get; set; }
+        public string? UpdateUser { get; set; }
+
     }
 }

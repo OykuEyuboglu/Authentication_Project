@@ -53,18 +53,8 @@
   },
   {
     "ContainingType": "TaskCardController",
-    "Method": "GetAll",
-    "RelativePath": "api/TaskCard",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TaskCardController",
     "Method": "Create",
-    "RelativePath": "api/TaskCard",
+    "RelativePath": "api/TaskCard/addTaskCard",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -75,6 +65,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskCardController",
+    "Method": "GetAll",
+    "RelativePath": "api/TaskCard/getTaskCards",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]
