@@ -54,7 +54,7 @@
   {
     "ContainingType": "TaskCardController",
     "Method": "Create",
-    "RelativePath": "api/TaskCard/addTaskCard",
+    "RelativePath": "api/TaskCard/addTaskCards",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

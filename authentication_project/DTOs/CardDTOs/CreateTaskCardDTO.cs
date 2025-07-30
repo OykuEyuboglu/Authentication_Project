@@ -2,14 +2,14 @@
 {
     public class CreateTaskCardDTO
     {
-        public string? Barcode { get; set; }
-        public int? TypeId { get; set; }
-        public int? StatusId { get; set; }
-        public string? Description { get; set; }
-        public string? TailNo { get; set; }
-        public bool? IsCritical { get; set; }
-        public string CreateUser { get; set; }
-        public string? UpdateUser { get; set; }
+        public string? barcode { get; set; }
+        public int? typeId { get; set; }
+        public int? statusId { get; set; }
+        public string? description { get; set; }
+        public string? tailNo { get; set; }
+        public bool? isCritical { get; set; }
+        public string createUser { get; set; }
+        public string? updateUser { get; set; }
 
     }
 }

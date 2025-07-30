@@ -103,7 +103,7 @@
         }
       }
     },
-    "/api/TaskCard/addTaskCard": {
+    "/api/TaskCard/addTaskCards": {
       "post": {
         "tags": [
           "TaskCard"
@@ -140,37 +140,37 @@
       "CreateTaskCardDTO": {
         "type": "object",
         "properties": {
-          "Barcode": {
+          "barcode": {
             "type": "string",
             "nullable": true
           },
-          "TypeId": {
+          "typeId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "StatusId": {
+          "statusId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "Description": {
+          "description": {
             "type": "string",
             "nullable": true
           },
-          "TailNo": {
+          "tailNo": {
             "type": "string",
             "nullable": true
           },
-          "IsCritical": {
+          "isCritical": {
             "type": "boolean",
             "nullable": true
           },
-          "CreateUser": {
+          "createUser": {
             "type": "string",
             "nullable": true
           },
-          "UpdateUser": {
+          "updateUser": {
             "type": "string",
             "nullable": true
           }
