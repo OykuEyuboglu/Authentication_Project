@@ -172,3 +172,13 @@ C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_projec
 C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
 C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
 C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\EntityFramework.SqlServer.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\EntityFramework.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\LinqKit.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\LinqKit.Core.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\System.Data.SqlClient.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\dila.eyuboglu\source\repos\authentication_project\authentication_project\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

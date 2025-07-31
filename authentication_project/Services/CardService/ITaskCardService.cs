@@ -6,7 +6,7 @@ namespace authentication_project.Services.CardServices
 {
     public interface ITaskCardService
     {
-        Task<List<TaskCardModel>> GetAllAsync();
-        Task<TaskCardModel> CreateAsync(CreateTaskCardDTO dto);
+        Task<List<TaskCardDto>> GetAllAsync();
+        Task<TaskCardDto> CreateAsync(CreateTaskCardDTO dto);
     }
 }

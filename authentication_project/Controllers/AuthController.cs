@@ -4,6 +4,8 @@ using authentication_project.Services.AuthServices;
 using authentication_project.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using authentication_project.Common;
+
 namespace authentication_project.Controllers
 {
     [ApiController]
@@ -14,10 +16,15 @@ namespace authentication_project.Controllers
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers([FromQuery] UserFilterDTO filter)
         {
-            var users = await userService.GetAllUsersAsync(filter);
-            if (users == null || !users.Any()) return NotFound();
+            filter ??= new UserFilterDTO();
 
-            return Ok(users);
+            var result = await userService.GetAllUsersAsync(filter);
+
+            if (!result.Success || result.Data == null || !result.Data.Any())
+                return BadRequest(result);
+
+            var users = result.Data;
+                return Ok(users);
         }
 
         [Authorize]

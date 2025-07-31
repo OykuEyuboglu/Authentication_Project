@@ -6,48 +6,37 @@ using authentication_project.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using authentication_project.Data.Entities;
 using authentication_project.DTOs.Card;
+using authentication_project.Profiles;
 
 namespace authentication_project.Services
 {
-    public class TaskCardService : ITaskCardService
+    public class TaskCardService(IHubContext<TaskCardHub> hubContext, ProjectContext dbContext) : MappingProfile, ITaskCardService
     {
-        private readonly IMapper _mapper;
-        private readonly IHubContext<TaskCardHub> _hubContext;
-        private readonly ProjectContext _dbContext;
-
-        public TaskCardService(IMapper mapper, IHubContext<TaskCardHub> hubContext, ProjectContext dbContext)
-        {
-            _mapper = mapper;
-            _hubContext = hubContext;
-            _dbContext = dbContext;
-        }
-
         public async Task BroadcastTaskCards(List<CreateTaskCardDTO> dtos)
         {
-            await _hubContext.Clients.All.SendAsync("ReceiveTaskCards", dtos);
+            await hubContext.Clients.All.SendAsync("ReceiveTaskCards", dtos);
         }
 
-        public async Task<List<TaskCardModel>> GetAllAsync()
+        public async Task<List<TaskCardDto>> GetAllAsync()
         {
-            var entities = await _dbContext.TaskCards.ToListAsync();
-
-            return _mapper.Map<List<TaskCardModel>>(entities);
+            var entities = await dbContext.TaskCards.ToListAsync();
+            return mapper.Map<List<TaskCardDto>>(entities);
         }
 
-        public async Task<TaskCardModel> CreateAsync(CreateTaskCardDTO dto)
+        public async Task<TaskCardDto> CreateAsync(CreateTaskCardDTO dto)
         {
-            var entity = _mapper.Map<TaskCard>(dto);
+            var entity = mapper.Map<TaskCard>(dto);
             entity.CreateDate = DateTime.UtcNow;
             entity.IsActive = true;
 
-            _dbContext.Set<TaskCard>().Add(entity);
-            await _dbContext.SaveChangesAsync();
+            dbContext.Set<TaskCard>().Add(entity);
+            await dbContext.SaveChangesAsync();
 
-            var model = _mapper.Map<TaskCardModel>(entity);
+            var model = mapper.Map<TaskCardDto>(entity);
 
             var allCards = await GetAllAsync();
 
-            await _hubContext.Clients.All.SendAsync("ReceiveTaskCards", allCards);
+            await hubContext.Clients.All.SendAsync("ReceiveTaskCards", allCards);
 
             return model;
         }
