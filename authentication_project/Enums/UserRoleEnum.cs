@@ -1,8 +1,13 @@
-﻿namespace authentication_project.Enums
+﻿using authentication_project.Extensions;
+using System.ComponentModel;
+
+namespace authentication_project.Enums
 {
     public enum UserRoleEnum
     {
-        User = 0,
-        TeamLeader = 1
+        [Description("Standart Kullanıcı")]
+        user = 1,
+        [Description("Takım Lideri")]
+        teamleader = 2
     }
 }

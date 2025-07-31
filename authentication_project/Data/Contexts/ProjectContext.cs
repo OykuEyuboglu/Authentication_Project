@@ -12,6 +12,13 @@ namespace authentication_project.Data.Contexts
 
         public DbSet<User> Users { get; set; }
         public DbSet<TaskCard> TaskCards { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().HasOne(u => u.Role).WithMany(r => r.Users).HasForeignKey(u => u.RoleId);
+        }
     }
 }

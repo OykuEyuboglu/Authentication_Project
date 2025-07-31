@@ -2,17 +2,33 @@
   {
     "ContainingType": "authentication_project.Controllers.AuthController",
     "Method": "GetAllUsers",
-    "RelativePath": "api/Auth/allusers",
+    "RelativePath": "api/Auth/GetAllUsers",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RoleId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "authentication_project.Controllers.AuthController",
     "Method": "GetCurrentUser",
-    "RelativePath": "api/Auth/getperson",
+    "RelativePath": "api/Auth/GetUser",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -22,7 +38,7 @@
   {
     "ContainingType": "authentication_project.Controllers.AuthController",
     "Method": "Login",
-    "RelativePath": "api/Auth/login",
+    "RelativePath": "api/Auth/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -38,7 +54,7 @@
   {
     "ContainingType": "authentication_project.Controllers.AuthController",
     "Method": "Register",
-    "RelativePath": "api/Auth/register",
+    "RelativePath": "api/Auth/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

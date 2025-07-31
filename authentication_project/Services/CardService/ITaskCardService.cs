@@ -8,6 +8,5 @@ namespace authentication_project.Services.CardServices
     {
         Task<List<TaskCardModel>> GetAllAsync();
         Task<TaskCardModel> CreateAsync(CreateTaskCardDTO dto);
-
     }
 }

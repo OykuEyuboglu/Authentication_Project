@@ -1,55 +1,44 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using authentication_project.DTOs.Auth;
+﻿using authentication_project.DTOs.Auth;
+using authentication_project.DTOs.FilterDTOs;
 using authentication_project.Services.AuthServices;
+using authentication_project.Services.UserService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 namespace authentication_project.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthController(IAuthService authService, IUserService userService) : ControllerBase
     {
-
-        private readonly ILoginService _loginService;
-        private readonly IRegisterService _registerService;
-        private readonly IUserService _userService;
-
-        public AuthController(IRegisterService registerService, ILoginService loginService, IUserService userService)
+        //[Authorize]
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers([FromQuery] UserFilterDTO filter)
         {
-            _registerService = registerService;
-            _loginService = loginService;
-            _userService = userService;
-        }
-
-
-        [Authorize]
-        [HttpGet("allusers")]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            var users = await _userService.GetAllUsersAsync();
-            if (users == null) return NotFound();
+            var users = await userService.GetAllUsersAsync(filter);
+            if (users == null || !users.Any()) return NotFound();
 
             return Ok(users);
         }
 
         [Authorize]
-        [HttpGet("getperson")]
+        [HttpGet("GetUser")]
         public async Task<IActionResult> GetCurrentUser()
         {
-            var result = await _userService.GetUserProfilAsync(User);
+            var result = await userService.GetUserProfilAsync(User);
             if (result == null) return NotFound();
 
             return Ok(result);
         }
 
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(new { error = "Geçersiz giriş verisi" });
 
 
-            var result = await _loginService.LoginAsync(request);
+            var result = await authService.LoginAsync(request);
             if (result == null)
                 return Unauthorized(new { error = "Email veya şifre hatalı" });
 
@@ -57,13 +46,13 @@ namespace authentication_project.Controllers
         }
 
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(new { error = "Geçersiz kayıt verisi" });
 
-            var result = await _registerService.RegisterAsync(request);
+            var result = await authService.RegisterAsync(request);
             if (!result)
                 return Conflict(new { error = "Bu e-posta zaten kayıtlı" });
 

@@ -1,7 +1,9 @@
 ﻿using authentication_project.Data.Contexts;
+using authentication_project.Data.Entities;
 using authentication_project.DTOs.Auth;
 using authentication_project.Handlers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,33 +11,22 @@ using System.Text;
 
 namespace authentication_project.Services.AuthServices
 {
-    public class TokenService : ITokenService
+    public class AuthService(IConfiguration configuration, ProjectContext dbContext) : IAuthService
     {
-        private readonly ProjectContext _dbContext;
-        private readonly IConfiguration _configuration;
-        public TokenService(ProjectContext dbContext, IConfiguration configuration)
-        {
-
-            _dbContext = dbContext;
-            _configuration = configuration;
-        }
-
         public async Task<LoginResponseDTO?> Authenticate(LoginRequestDTO request)
         {
-
             if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
                 return null;
 
-            var userAccount = await _dbContext.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
+            var userAccount = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
             if (userAccount is null || !PasswordHashHandler.VerifyPassword(request.Password, userAccount.PasswordHash))
                 return null;
 
-            var issuer = _configuration["Jwt:Issuer"];
-            var audience = _configuration["Jwt:Audience"];
-            var key = _configuration["Jwt:Key"];
-            var tokenValidityMins = _configuration.GetValue<int>("Jwt:ExpireMinutes");
+            var issuer = configuration["Jwt:Issuer"];
+            var audience = configuration["Jwt:Audience"];
+            var key = configuration["Jwt:Key"];
+            var tokenValidityMins = configuration.GetValue<int>("Jwt:ExpireMinutes");
             var tokenExpiryTimeStamp = DateTime.UtcNow.AddMinutes(tokenValidityMins);
-
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -70,7 +61,31 @@ namespace authentication_project.Services.AuthServices
                 Console.WriteLine("TOKEN OLUŞTURMA HATASI: " + ex.Message);
                 return null;
             }
+        }
+        public async Task<LoginResponseDTO?> LoginAsync(LoginRequestDTO request)
+        {
+            var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            if (user == null || !PasswordHashHandler.VerifyPassword(request.Password, user.PasswordHash))
+                return null;
 
+            return await Authenticate(request);
+        }
+        public async Task<bool> RegisterAsync(RegisterDTO request)
+        {
+            var exists = await dbContext.Users.AnyAsync(u => u.Email == request.Email);
+            if (exists) return false;
+
+            var hashPassword = PasswordHashHandler.HashPassword(request.Password);
+
+            dbContext.Users.Add(new User
+            {
+                Email = request.Email,
+                PasswordHash = hashPassword,
+                UserName = request.UserName
+            });
+
+            await dbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

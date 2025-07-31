@@ -2,8 +2,10 @@
 
 namespace authentication_project.Services.AuthServices
 {
-    public interface ILoginService
+    public interface IAuthService
     {
+        Task<LoginResponseDTO?> Authenticate(LoginRequestDTO request);
         Task<LoginResponseDTO?> LoginAsync(LoginRequestDTO request);
+        Task<bool> RegisterAsync(RegisterDTO request);
     }
 }
