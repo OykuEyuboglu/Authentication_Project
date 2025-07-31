@@ -5,13 +5,13 @@ using authentication_project.DTOs.Auth;
 using authentication_project.DTOs.FilterDTOs;
 using authentication_project.Profiles;
 using LinqKit;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Data.Entity;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 
 namespace authentication_project.Services.UserService
 {
-
-
     public class UserService(ProjectContext dbContext) : MappingProfile, IUserService
     {
         #region Helper Methods
@@ -29,31 +29,44 @@ namespace authentication_project.Services.UserService
             return filter;
         }
         #endregion
-        public async Task<List<UserProfilDTO>> GetAllUsersAsync(UserFilterDTO filter)
+        public async Task<Result<List<UserProfilDTO>>> GetAllUsersAsync(UserFilterDTO filter)
         {
-            var predicate = FilterBuilder(filter);
-            if(!predicate.IsStarted)
+            var result = new Result<List<UserProfilDTO>>();
+            try
             {
-                // Ortak bir Result sınıfı geliştirilip onunla birlikte verimi. Hata döndürme
-                //if (result.IsFailure)
-                //{
-                //    Console.WriteLine(result.Error);
-                //}
+                filter = new UserFilterDTO();
+
+                var predicate = FilterBuilder(filter);
+
+                var query = dbContext.Users.AsExpandable().Where(predicate);
+                var users = query.ToList();
+
+                var mappedData = mapper.Map<List<UserProfilDTO>>(users);
+
+                if (!predicate.IsStarted)
+                {
+                    result.TimeStamp = DateTime.Now;
+                    result.Messages.Add("\"Filtre belirtilmedi");
+                    return result;
+                }
+
+                result.TimeStamp = DateTime.Now;
+                result.Data = mappedData;
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Messages.Add($"server error:\n{ex.Message}");
+                result.TimeStamp = DateTime.Now;
             }
 
-            var query = dbContext.Users.AsQueryable();
-            query.Where(predicate);
-
-            var users = await query.ToListAsync();
-
-            var mappedData = mapper.Map<List<UserProfilDTO>>(users);
-            return mappedData;
+            return result;
         }
 
         public async Task<UserProfilDTO> GetUserProfilAsync(ClaimsPrincipal user)
         {
             var email = user.FindFirstValue(ClaimTypes.Email) ?? user.FindFirstValue("email");
-            if (email == null) return null; 
+            if (email == null) return null;
             // TODO: Jenerik hata yönetimi gelsin, API'den dönen hatalar jenerikleşirse kullanıcıya mobilden otomatik hata mesajlarının gösterimi Dio paketi ile kolaylık kazanacaktır.
 
             var entity = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);

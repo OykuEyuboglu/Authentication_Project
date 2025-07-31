@@ -16,7 +16,7 @@ namespace authentication_project.Profiles
             var config = new MapperConfiguration(map =>
             {
                 map.CreateMap<TaskCard, CreateTaskCardDTO>().ReverseMap();
-                map.CreateMap<TaskCard, TaskCardModel>().ReverseMap();
+                map.CreateMap<TaskCard, TaskCardDto>().ReverseMap();
                 map.CreateMap<User, UserProfilDTO>()
                     .ForMember(dest => dest.RoleDescription, opt => opt.MapFrom(src => ((UserRoleEnum)src.RoleId).GetDescription()));
             });
