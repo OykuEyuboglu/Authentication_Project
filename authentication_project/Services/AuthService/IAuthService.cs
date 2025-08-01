@@ -1,11 +1,12 @@
-﻿using authentication_project.DTOs.Auth;
+﻿using authentication_project.Common;
+using authentication_project.DTOs.Auth;
 
 namespace authentication_project.Services.AuthServices
 {
     public interface IAuthService
     {
-        Task<LoginResponseDTO?> Authenticate(LoginRequestDTO request);
-        Task<LoginResponseDTO?> LoginAsync(LoginRequestDTO request);
-        Task<bool> RegisterAsync(RegisterDTO request);
+        Task<Result<LoginResponseDTO?>> Authenticate(LoginRequestDTO request);
+        Task<Result<LoginResponseDTO?>> LoginAsync(LoginRequestDTO request);
+        Task<Result<bool>> RegisterAsync(RegisterDTO request);
     }
 }

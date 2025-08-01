@@ -1,26 +1,17 @@
-﻿using authentication_project.DTOs.Card;
+﻿using authentication_project.Common;
+using authentication_project.DTOs.Card;
 using authentication_project.Services.CardServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TaskCardController : ControllerBase
+public class TaskCardController(ITaskCardService taskCardService, IHubContext<TaskCardHub> hubContext) : ControllerBase
 {
-    private readonly ITaskCardService _taskCardService;
-    private readonly IHubContext<TaskCardHub> _hubContext;
-
-    public TaskCardController(ITaskCardService taskCardService, IHubContext<TaskCardHub> hubContext)
-    {
-        _taskCardService = taskCardService;
-        _hubContext = hubContext;
-    }
-
     [HttpGet("getTaskCards")]
     public async Task<IActionResult> GetAll()
     {
-        var cards = await _taskCardService.GetAllAsync();
+        var cards = await taskCardService.GetAllAsync();
         return Ok(cards);
     }
 
@@ -30,10 +21,44 @@ public class TaskCardController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var createdCard = await _taskCardService.CreateAsync(createDto);
-        var allCards = await _taskCardService.GetAllAsync();
-        await _hubContext.Clients.All.SendAsync("ReceiveTaskCards", allCards);
+        var createdCard = await taskCardService.CreateAsync(createDto);
+        var allCards = await taskCardService.GetAllAsync();
 
-        return CreatedAtAction(nameof(GetAll), new { id = createdCard.id }, createdCard);
+        await hubContext.Clients.All.SendAsync("ReceiveTaskCards", allCards);
+
+        return CreatedAtAction(nameof(GetAll), new { id = createdCard.Data?.id }, createdCard);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var result = await taskCardService.GetByIdAsync(id);
+
+        if (result == null)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] CreateTaskCardDTO dto)
+    {
+        var result = await taskCardService.UpdateAsync(id, dto);
+
+        if (!result.Success)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await taskCardService.DeleteAsync(id);
+
+        if (!result.Success)
+            return BadRequest(result);
+
+        return Ok(result);
     }
 }
