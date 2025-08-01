@@ -1,10 +1,10 @@
 ﻿using authentication_project.DTOs.Auth;
+using authentication_project.DTOs.AuthDTOs;
 using authentication_project.DTOs.FilterDTOs;
 using authentication_project.Services.AuthServices;
 using authentication_project.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using authentication_project.Common;
 
 namespace authentication_project.Controllers
 {
@@ -12,31 +12,6 @@ namespace authentication_project.Controllers
     [Route("api/[controller]")]
     public class AuthController(IAuthService authService, IUserService userService) : ControllerBase
     {
-        //[Authorize]
-        [HttpGet("GetAllUsers")]
-        public async Task<IActionResult> GetAllUsers([FromQuery] UserFilterDTO filter)
-        {
-            filter ??= new UserFilterDTO();
-
-            var result = await userService.GetAllUsersAsync(filter);
-
-            if (!result.Success || result.Data == null || !result.Data.Any())
-                return BadRequest(result);
-
-            var users = result.Data;
-                return Ok(users);
-        }
-
-        [Authorize]
-        [HttpGet("GetUser")]
-        public async Task<IActionResult> GetCurrentUser()
-        {
-            var result = await userService.GetUserProfilAsync(User);
-            if (result == null) return NotFound();
-
-            return Ok(result);
-        }
-
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO request)
@@ -52,7 +27,6 @@ namespace authentication_project.Controllers
             return Ok(result);
         }
 
-
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO request)
         {
@@ -60,10 +34,58 @@ namespace authentication_project.Controllers
                 return BadRequest(new { error = "Geçersiz kayıt verisi" });
 
             var result = await authService.RegisterAsync(request);
-            if (!result)
+            if (!result.Success)
                 return Conflict(new { error = "Bu e-posta zaten kayıtlı" });
 
             return CreatedAtAction(nameof(GetCurrentUser), new { }, new { message = "Kayıt başarılı" });
+        }
+
+        //[Authorize]
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers([FromQuery] UserFilterDTO filter)
+        {
+            filter ??= new UserFilterDTO();
+
+            var result = await userService.GetAllUsersAsync(filter);
+
+            if (!result.Success || result.Data == null || !result.Data.Any())
+                return BadRequest(result);
+
+            var users = result.Data;
+            return Ok(users);
+        }
+
+        [Authorize]
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var result = await userService.GetUserProfilAsync(User);
+            if (result == null) return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserUpdateDTO dto)
+        {
+            
+            var result = await userService.UpdateAsync(id, dto);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var result = await userService.DeleteAsync(id);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
         }
     }
 }
