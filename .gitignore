@@ -1,2 +1,18 @@
-.vs/ 
--e "\nbin/\nobj/" 
+# Ignore build and user-specific files anywhere in the repo
+**/bin/
+**/obj/
+**/.vs/
+**/*.user
+**/*.suo
+**/*.log
+**/*.tmp
+
+# Ignore launchSettings
+**/Properties/launchSettings.json
+
+# Ignore Rider/VS Code
+.idea/
+.vscode/
+
+# Ignore publish output
+**/publish/
