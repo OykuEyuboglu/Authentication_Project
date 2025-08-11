@@ -30,6 +30,11 @@ namespace authentication_project.Profiles
             CreateMap<TaskCard, TaskCardModel>().ReverseMap();
             CreateMap<User, UserProfilDTO>()
                 .ForMember(dest => dest.RoleDescription, opt => opt.MapFrom(src => ((UserRoleEnum)src.RoleId).GetDescription()));
+
+            CreateMap<User, UserDto>();
+            CreateMap<CreateUserDto, User>();
+            CreateMap<UpdateUserDto, User>()
+                .ForMember(dest => dest.PasswordHash, opt => opt.Ignore());
         }
     }
 }

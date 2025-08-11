@@ -6347,23 +6347,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dila.eyuboglu\\.nuget\\packages\\": {},
+    "C:\\Users\\aysun.ay\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dila.eyuboglu\\source\\repos\\authentication_project\\authentication_project\\authentication_project.csproj",
+      "projectUniqueName": "C:\\Users\\aysun.ay\\source\\repos\\Authentication_Project\\authentication_project\\authentication_project.csproj",
       "projectName": "authentication_project",
-      "projectPath": "C:\\Users\\dila.eyuboglu\\source\\repos\\authentication_project\\authentication_project\\authentication_project.csproj",
-      "packagesPath": "C:\\Users\\dila.eyuboglu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dila.eyuboglu\\source\\repos\\authentication_project\\authentication_project\\obj\\",
+      "projectPath": "C:\\Users\\aysun.ay\\source\\repos\\Authentication_Project\\authentication_project\\authentication_project.csproj",
+      "packagesPath": "C:\\Users\\aysun.ay\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\aysun.ay\\source\\repos\\Authentication_Project\\authentication_project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\dila.eyuboglu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\aysun.ay\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6372,7 +6372,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

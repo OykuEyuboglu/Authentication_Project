@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.4",
   "info": {
-    "title": "authentication_project",
-    "version": "1.0"
+    "title": "Your API",
+    "version": "v1"
   },
   "paths": {
     "/api/Auth/Login": {
@@ -304,6 +304,41 @@
           }
         }
       }
+    },
+    "/api/User": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -350,17 +385,17 @@
       },
       "LoginRequestDTO": {
         "required": [
-          "Email",
-          "Password"
+          "email",
+          "password"
         ],
         "type": "object",
         "properties": {
-          "Email": {
+          "email": {
             "minLength": 1,
             "type": "string",
             "format": "email"
           },
-          "Password": {
+          "password": {
             "minLength": 6,
             "type": "string"
           }
@@ -369,26 +404,26 @@
       },
       "RegisterDTO": {
         "required": [
-          "Email",
-          "Password",
-          "UserName"
+          "email",
+          "password",
+          "userName"
         ],
         "type": "object",
         "properties": {
-          "Email": {
+          "email": {
             "minLength": 1,
             "type": "string",
             "format": "email"
           },
-          "UserName": {
+          "userName": {
             "minLength": 1,
             "type": "string"
           },
-          "Password": {
+          "password": {
             "minLength": 6,
             "type": "string"
           },
-          "RoleId": {
+          "roleId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -399,20 +434,20 @@
       "UserUpdateDTO": {
         "type": "object",
         "properties": {
-          "Email": {
+          "email": {
             "type": "string",
             "nullable": true
           },
-          "Username": {
+          "username": {
             "type": "string",
             "nullable": true
           },
-          "PasswordHash": {
+          "passwordHash": {
             "minLength": 6,
             "type": "string",
             "nullable": true
           },
-          "RoleId": {
+          "roleId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -420,6 +455,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Bearer <token>",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }

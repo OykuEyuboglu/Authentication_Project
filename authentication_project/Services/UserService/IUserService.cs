@@ -10,7 +10,9 @@ namespace authentication_project.Services.UserService
     {
         Task<Result<List<UserProfilDTO>>> GetAllUsersAsync(UserFilterDTO filter);
         Task<Result<UserProfilDTO>> GetUserProfilAsync(ClaimsPrincipal user);
+        Task<Result<UserProfilDTO>> GetProfileByIdAsync(int id);
         Task<Result<bool>> UpdateAsync(int id, UserUpdateDTO dto);
         Task<Result<bool>> DeleteAsync(int id);
+        
     }
 }
