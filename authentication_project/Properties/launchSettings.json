@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "authentication_project": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:7163"
+    }
+  }
+}
