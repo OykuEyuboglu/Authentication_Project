@@ -113,6 +113,10 @@ namespace authentication_project.Services.AuthServices
 
             try
             {
+                if (request.RoleId == null)
+                {
+                    request.RoleId = 1;
+                }
                 var exists = await dbContext.Users.AnyAsync(u => u.Email == request.Email);
                 if (exists)
                 {

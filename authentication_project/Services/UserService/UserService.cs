@@ -174,5 +174,33 @@ namespace authentication_project.Services.UserService
             }
             return result;
         }
+        public async Task<Result<UserProfilDTO>> GetProfileByIdAsync(int id)
+        {
+            var result = new Result<UserProfilDTO>();
+
+            try
+            {
+                var user = await dbContext.Users.FindAsync(id);
+                if (user == null)
+                {
+                    result.Success = false;
+                    result.Messages.Add("User not found");
+                    return result;
+                }
+
+                var dto = mapper.Map<UserProfilDTO>(user);
+                result.Success = true;
+                result.Data = dto;
+                result.Messages.Add("Success");
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Messages.Add("An unexpected error occurred: " + ex.Message);
+            }
+
+            return result;
+        }
+
     }
 }
