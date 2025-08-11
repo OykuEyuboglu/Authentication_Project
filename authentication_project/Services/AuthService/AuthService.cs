@@ -63,9 +63,11 @@ namespace authentication_project.Services.AuthServices
                 result.Success = true;
                 result.Data = new LoginResponseDTO
                 {
+                    Username = userAccount.UserName,
                     AccessToken = accessToken,
                     Email = request.Email,
-                    ExpiresIn = (int)tokenExpiryTimeStamp.Subtract(DateTime.UtcNow).TotalSeconds
+                    ExpiresIn = (int)tokenExpiryTimeStamp.Subtract(DateTime.UtcNow).TotalSeconds,
+                    Role = userAccount.RoleId.ToString()
                 };
 
             }
@@ -94,6 +96,7 @@ namespace authentication_project.Services.AuthServices
                 }
 
                 var tokenResult = await Authenticate(request);
+                
 
                 result.Success = true;
                 result.Data = tokenResult.Data;
@@ -126,6 +129,12 @@ namespace authentication_project.Services.AuthServices
 
                 var user = mapper.Map<User>(request);
                 user.PasswordHash = PasswordHashHandler.HashPassword(request.Password);
+
+                if (user.RoleId == 0 || user.RoleId == null)
+                {
+                    user.RoleId = 1;
+
+                }
 
                 dbContext.Users.Add(user);
                 await dbContext.SaveChangesAsync();

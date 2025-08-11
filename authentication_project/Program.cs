@@ -15,39 +15,31 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Db
 builder.Services.AddDbContext<ProjectContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Controllers + JSON
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    // Flutter uyumu için camelCase:
-    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-});
-
-// DI
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddAuthorization();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITaskCardService, TaskCardService>();
-
-// AutoMapper
-builder.Services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly()); // tek çağrı yeter
+//builder.Services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly()); // tek çağrı yeter
+builder.Services.AddSignalR();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// SignalR
+
 builder.Services.AddSignalR();
 
-// CORS
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("DevCors", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        policy
-            .AllowAnyOrigin()    // PROD'da sabitle: .WithOrigins("http://localhost:5555", ...)
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+        policy.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
     });
 });
 
@@ -63,7 +55,7 @@ builder.Services
     })
     .AddJwtBearer(options =>
     {
-        options.RequireHttpsMetadata = false; // dev
+        options.RequireHttpsMetadata = false;
         options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -124,15 +116,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapHub<MainHub>("/mainhub");
+
 app.UseHttpsRedirection();
 
 app.UseRouting();
-app.UseCors("DevCors");
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapHub<TaskCardHub>("/taskCardHub");
 app.MapControllers();
 
 app.Run();

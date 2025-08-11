@@ -2,12 +2,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 
-public class TaskCardHub : Hub
+public class MainHub : Hub
 {
     private readonly ITaskCardService _taskCardService;
     private readonly IMapper _mapper;
 
-    public TaskCardHub(ITaskCardService taskCardService)
+    public MainHub(ITaskCardService taskCardService)
     {
         _taskCardService = taskCardService;
     }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TaskCardController(ITaskCardService taskCardService, IHubContext<TaskCardHub> hubContext) : ControllerBase
+public class TaskCardController(ITaskCardService taskCardService, IHubContext<MainHub> hubContext) : ControllerBase
 {
     [HttpGet("getTaskCards")]
     public async Task<IActionResult> GetAll()
@@ -29,7 +29,7 @@ public class TaskCardController(ITaskCardService taskCardService, IHubContext<Ta
         return CreatedAtAction(nameof(GetAll), new { id = createdCard.Data?.id }, createdCard);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("getTaskCards/{id}")]
     public async Task<IActionResult> GetById(int id)
     {
         var result = await taskCardService.GetByIdAsync(id);

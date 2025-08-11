@@ -61,7 +61,6 @@ namespace authentication_project.Services.UserService
             return result;
         }
 
-        // TODO: Jenerik hata yönetimi gelsin, API'den dönen hatalar jenerikleşirse kullanıcıya mobilden otomatik hata mesajlarının gösterimi Dio paketi ile kolaylık kazanacaktır.
         public async Task<Result<UserProfilDTO>> GetUserProfilAsync(ClaimsPrincipal user)
         {
             var result = new Result<UserProfilDTO>();
@@ -174,6 +173,10 @@ namespace authentication_project.Services.UserService
             }
             return result;
         }
+
+
+
+        //BU BAKILACAK zaten authcontrollerda var
         public async Task<Result<UserProfilDTO>> GetProfileByIdAsync(int id)
         {
             var result = new Result<UserProfilDTO>();
