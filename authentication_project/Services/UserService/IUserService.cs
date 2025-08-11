@@ -12,5 +12,6 @@ namespace authentication_project.Services.UserService
         Task<Result<UserProfilDTO>> GetUserProfilAsync(ClaimsPrincipal user);
         Task<Result<bool>> UpdateAsync(int id, UserUpdateDTO dto);
         Task<Result<bool>> DeleteAsync(int id);
+        Task<CancellationToken> GetAllUsersAsync();
     }
 }

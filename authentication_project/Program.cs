@@ -104,7 +104,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapHub<TaskCardHub>("/taskCardHub");
+app.MapHub<MainHub>("/mainhub");
 
 app.UseHttpsRedirection();
 app.UseRouting();

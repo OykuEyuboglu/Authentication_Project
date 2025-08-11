@@ -13,7 +13,7 @@ using System.Net.WebSockets;
 
 namespace authentication_project.Services
 {
-    public class TaskCardService(IHubContext<TaskCardHub> hubContext, ProjectContext dbContext, IMapper mapper) : ITaskCardService
+    public class TaskCardService(IHubContext<MainHub> hubContext, ProjectContext dbContext, IMapper mapper) : ITaskCardService
     {
         #region Helper Methods
         public static ExpressionStarter<TaskCard> FilterBuilder(TaskCardFilterDTO request)

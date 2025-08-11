@@ -2,6 +2,8 @@
 {
     public class TaskCardFilterDTO
     {
+        public int id { get; set; }
+
         public string? barcode { get; set; }
         public int? typeId { get; set; }
         public int? statusId { get; set; }
