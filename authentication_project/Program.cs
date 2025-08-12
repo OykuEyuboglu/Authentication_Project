@@ -28,6 +28,7 @@ builder.Services.AddScoped<ITaskCardService, TaskCardService>();
 //builder.Services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly()); // tek çağrı yeter
 builder.Services.AddSignalR();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddSignalR();
@@ -36,14 +37,11 @@ builder.Services.AddSignalR();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
-    {
         policy.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-    });
+              .AllowAnyMethod()
+              .AllowAnyHeader());
 });
 
-// JWT
 var jwt = builder.Configuration.GetSection("Jwt");
 var key = jwt.GetValue<string>("Key") ?? throw new InvalidOperationException("Jwt:Key is missing");
 builder.Services
@@ -109,14 +107,15 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API V1");
+    c.RoutePrefix = string.Empty;
+});
 
-app.MapHub<MainHub>("/mainhub");
+app.MapHub<MainHub>("/taskCardHub");
 
 app.UseHttpsRedirection();
 
