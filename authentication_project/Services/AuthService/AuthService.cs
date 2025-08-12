@@ -96,7 +96,7 @@ namespace authentication_project.Services.AuthServices
                 }
 
                 var tokenResult = await Authenticate(request);
-                
+
 
                 result.Success = true;
                 result.Data = tokenResult.Data;
@@ -116,10 +116,11 @@ namespace authentication_project.Services.AuthServices
 
             try
             {
-                if (request.RoleId == null)
+                if (request.RoleId == null || request.RoleId == 0)
                 {
                     request.RoleId = 1;
                 }
+
                 var exists = await dbContext.Users.AnyAsync(u => u.Email == request.Email);
                 if (exists)
                 {
@@ -128,13 +129,10 @@ namespace authentication_project.Services.AuthServices
                 }
 
                 var user = mapper.Map<User>(request);
+
                 user.PasswordHash = PasswordHashHandler.HashPassword(request.Password);
 
-                if (user.RoleId == 0 || user.RoleId == null)
-                {
-                    user.RoleId = 1;
-
-                }
+                
 
                 dbContext.Users.Add(user);
                 await dbContext.SaveChangesAsync();

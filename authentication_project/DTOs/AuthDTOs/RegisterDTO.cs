@@ -15,7 +15,9 @@ namespace authentication_project.DTOs.Auth
         [MinLength(6, ErrorMessage = "Şifre en az 6 karakter olmalı")]
         public string? Password { get; set; }
         public int? RoleId { get; set; }
+        public string FullName { get; set; }
+        public string EmployeeId { get; set; }
+        public string Title { get; set; }
+        public int? TeamId { get; set; }
     }
 }
-
-

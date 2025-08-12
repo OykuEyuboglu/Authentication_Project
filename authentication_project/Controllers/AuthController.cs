@@ -35,7 +35,7 @@ namespace authentication_project.Controllers
 
             var result = await authService.RegisterAsync(request);
             if (!result.Success)
-                return Conflict(new { error = "Bu e-posta zaten kayıtlı" });
+                return Conflict(new { error = result.Messages });
 
             return CreatedAtAction(nameof(GetCurrentUser), new { }, new { message = "Kayıt başarılı" });
         }

@@ -8,12 +8,11 @@
         public string Email { get; set; }
         public string EmployeeId { get; set; }
         public string Title { get; set; }
-        public string AppLanguage { get; set; }
         public string PasswordHash { get; set; }
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
         public Role Role { get; set; }
         public int? TeamId { get; set; }
         public Team? Team { get; set; }
-        
+
     }
 }
