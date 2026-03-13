@@ -2,17 +2,17 @@
 {
     public class TaskCardModel
     {
-        public int Id { get; set; }
-        public string? Barcode { get; set; }
-        public int? TypeId { get; set; }
-        public int? StatusId { get; set; }
-        public string? Description { get; set; }
-        public string? TailNo { get; set; }
-        public bool? IsCritical { get; set; }
-        public DateTime CreateDate { get; set; }
-        public string CreateUser { get; set; }
-        public DateTime? UpdateDate { get; set; } = null!;
-        public string? UpdateUser { get; set; }
-        public bool IsActive { get; set; }
+        public int id { get; set; }
+        public string? barcode { get; set; }
+        public int? typeId { get; set; }
+        public int? statusId { get; set; }
+        public string? description { get; set; }
+        public string? tailNo { get; set; }
+        public bool? isCritical { get; set; }
+        public DateTime createDate { get; set; }
+        public string createUser { get; set; }
+        public DateTime? updateDate { get; set; } = null!;
+        public string? updateUser { get; set; }
+        public bool isActive { get; set; }
     }
 }
